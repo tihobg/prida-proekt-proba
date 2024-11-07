@@ -127,7 +127,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'django_project' / 'static',
+    BASE_DIR / 'pridastartpr' / 'static',
 ]
 
 # Default primary key field type
