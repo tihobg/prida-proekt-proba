@@ -1,12 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from . models import Patients
-from . forms import PreeclampsiaForm
+from . forms import PreeclampsiaForm, RegisterForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 import base64
 import io
 import urllib
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            login(request, form.get_user())
+            return redirect('/preeclampsia1')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'users/login.html', { 'form' : form})
 
 
 def home1(request):
@@ -58,8 +72,8 @@ def add_edit_patient(request):
     return render(request, 'add_edit_patient.html')
 
 
-def login(request):
-    return render(request, 'login.html')
+# def login(request):
+#     return render(request, 'login.html')
 
 
 def correlation(request):
